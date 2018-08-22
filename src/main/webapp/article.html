@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="pragma" content="no -cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+    <title>内容管理-法奈昇大数据平台</title>
+    <meta name="keywords" content="法奈昇大数据平台">
+    <meta name="description" content="法奈昇大数据平台">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="js/bootstrap/css/font-awesome.css" rel="stylesheet">
+    <link href="css/plugins/ztree/metroStyle/metroStyle.css" rel="stylesheet">
+    <link href="css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+<div class="panel-body animated fadeInRight">
+    <div class="panel panel-default">
+        <!-- 搜索条件 -->
+        <form id="formSearch" class="form-horizontal">
+            <div class="form-group" style="margin-top:15px">
+                <div class="row col-sm-10">
+                    <div class="col-sm-4">
+                        <label class="control-label" for="articleTitle">文章标题：</label>
+                        <input type="text" class="form-control" id="articleTitle">
+                    </div>
+                    <!--<div class="col-sm-3">
+				        <label class="control-label" for="search_status">文章状态:</label> <select
+					    id="search_status" name="search_status" class="form-control">
+					    <option value='2' selected>全部</option>
+					    <option value="0">删除</option>
+					    <option value="1">正常</option>
+				    </select>
+			        </div>-->
+                </div>
+                <div class="col-sm-2" style="text-align: right;">
+                    <button type="button" id="btn_query" class="btn btn-primary"
+                            onclick="javascript:queryEvent('table');"><span class="glyphicon glyphicon-search"></span>查询
+                    </button>
+                    <button type="button" id="btn_reset" class="btn btn-default"
+                            onclick="javascript:resetEvent('formSearch','table');"><span
+                            class="glyphicon glyphicon-refresh"></span>重置
+                    </button>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row row-lg">
+                        <div class="col-sm-12">
+                            <div id="toolbar">
+                                <button id="btn_add" type="button" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                                </button>
+                                <button id="btn_edit" type="button" class="btn btn-warning">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+                                </button>
+                                <button id="btn_delete" type="button" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                                </button>
+                            </div>
+                            <table id="table"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 新增 -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModelLabel" data-backdrop="static"
+     data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="addModalLabel">内容新增</h4>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <label class="control-label" for="article_title">文章标题：</label>
+                                <input type="text" class="form-control" id="article_title" placeholder="文章标题" name="name"
+                                       required="required">
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="control-label" for="article_from">文章来源：</label>
+                                <input type="text" class="form-control" id="article_from" placeholder="文章来源" name="article_from"
+                                required="required">
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="control-label"  for="article_author">文章作者：</label>
+                                <input type="text" class="form-control" id="article_author" name="article_author" placeholder="文章作者">
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="control-label" for="article_desc">文章描述：</label>
+                                <textarea id="article_desc" name="article_desc" class="form-control" rows="5"  placeholder="文章描述"></textarea>
+                                <!--<input type="number" class="form-control" id="article_desc" name="article_desc"
+                                       placeholder="文章描述">-->
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="control-label"  for="article_content">文章内容：</label>
+                                <textarea id="article_content" name="article_content" style="width:700px;height:300px;"></textarea>
+                                <!--<input type="text" class="form-control" id="article_content" name="article_content"
+                            readonly="readonly" placeholder="文章内容">-->
+                            </div>
+                            <!--<div class="col-sm-8">
+                                <label class="control-label" for="searchStatus">文章状态:</label> <select
+                                    id="searchStatus" name="searchStatus" class="form-control">
+                                <option value="0">删除</option>
+                                <option value="1">正常</option>
+                            </select>
+                        </div>-->
+                </div>
+            </div>
+        </div>
+            <div class="modal-footer">
+                <div class="tab-content">
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label"></div>
+                        <button id="btn_yes" type="button" class="btn btn-primary">
+                            <span aria-hidden="true"></span>确认添加
+                        </button>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+</div>
+<!-- 修改 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+    data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="editModalLabel">内容修改</h4>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <label class="control-label" for="article_title1">文章标题：</label>
+                                <input type="text" class="form-control" id="article_title1" placeholder="文章标题" name="article_title1"
+                                       required="required">
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="control-label" for="article_from1">文章来源：</label>
+                                <input type="text" class="form-control" id="article_from1" placeholder="文章来源" name="article_from1"
+                                required="required">
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="control-label"  for="article_author1">文章作者：</label>
+                                <input type="text" class="form-control" id="article_author1" name="article_author1"  placeholder="文章作者">
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="control-label" for="article_desc1">文章描述：</label>
+                                <textarea id="article_desc1" name="article_desc1" class="form-control" rows="3"  placeholder="文章描述"></textarea>
+                                <!-- <input type="number" class="form-control" id="article_desc1" name="article_desc1"
+                                        placeholder="文章描述">-->
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="control-label"  for="article_content1">文章内容：</label>
+                                <textarea id="article_content1" name="article_content1" style="width:700px;height:300px;"></textarea>
+                                <!-- <input type="text" class="form-control" id="article_content1" name="article_content1"
+                            readonly="readonly" placeholder="文章内容">-->
+                            </div>
+                            <!--<div class="col-sm-8">
+                                <label class="control-label" for="searchStatus1">文章状态:</label> <select
+                                    id="searchStatus1" name="searchStatus1" class="form-control">
+                                <option value="0">删除</option>
+                                <option value="1">正常</option>
+                            </select>
+                            </div>-->
+                        </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="tab-content">
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label"></div>
+                        <button id="btn_yes1" type="button" class="btn btn-primary" role="tab" data-toggle="tab">
+                            <span aria-hidden="true"></span>确认修改
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script charset="utf-8" src="js/kindeditor/kindeditor-all.js"></script>
+<script charset="utf-8" src="js/kindeditor/lang/zh-CN.js"></script>
+<script src="https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="js/plugins/bootstrap-table/tableExport.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-table-editable.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-editable.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+<script src="js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="js/plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="js/layer/layer.js"></script>
+<script type="text/javascript" src="js/fnsco/common.js"></script>
+<script type="text/javascript">
+    //在页面加载完成之后动态加载，避免因为缓存问题导致数据展示不对(在不人工清理缓存情况下)
+    var options = {
+        width: '700px',
+        height: '300px',
+        cssPath : '../cms/js/kindeditor/plugins/code/prettify.css',
+        uploadJson : '../cms/js/kindeditor/jsp/upload_json.jsp',
+        fileManagerJson : '../cms/js/kindeditor/jsp/file_manager_json.jsp',
+        allowFileManager : true,
+        afterBlur: function () {
+            this.sync();
+        },
+        afterCreate: function () {
+            this.sync();
+        }
+    }
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('#article_content', options);
+    });
+    var editor1;
+    KindEditor.ready(function(K) {
+        editor1 = K.create('#article_content1', options);
+    });
+    loadJSRandom(document, "js/fnsco/article.js");
+</script>
+</body>
+</html>

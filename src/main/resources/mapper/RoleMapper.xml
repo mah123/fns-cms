@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fnsco.cms.dao.RoleMapper">
+    <resultMap id="BaseResultMap" type="com.fnsco.cms.model.Role">
+        <id column="role_id" property="roleId" jdbcType="INTEGER"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="role_desc" property="roleDesc" jdbcType="VARCHAR"/>
+        <result column="role_state" property="roleState" jdbcType="INTEGER"/>
+        <result column="role_createtime" property="roleCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="role_createuser" property="roleCreateUser" jdbcType="VARCHAR"/>
+        <result column="role_updatetime" property="roleUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="role_updateuser" property="roleUpdateUser" jdbcType="VARCHAR"/>
+        <result column="role_deltime" property="roleDelTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    role_id, role_name, role_desc, role_state, role_createtime, role_createuser, role_updatetime, 
+    role_updateuser, role_deltime
+  </sql>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fns_cms_role
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.fnsco.cms.model.Role">
+    insert into fns_cms_role (role_id, role_name, role_desc, 
+      role_state, role_createtime, role_createuser, 
+      role_updatetime, role_updateuser, role_deltime
+      )
+    values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleDesc,jdbcType=VARCHAR}, 
+      #{roleState,jdbcType=INTEGER}, #{roleCreateTime,jdbcType=TIMESTAMP}, #{roleCreateUser,jdbcType=VARCHAR}, 
+      #{roleUpdateTime,jdbcType=TIMESTAMP}, #{roleUpdateUser,jdbcType=VARCHAR}, #{roleDelTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.fnsco.cms.model.Role">
+        insert into fns_cms_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="roleName != null">
+                role_name,
+            </if>
+            <if test="roleDesc != null">
+                role_desc,
+            </if>
+            <if test="roleState != null">
+                role_state,
+            </if>
+            <if test="roleCreateTime != null">
+                role_createtime,
+            </if>
+            <if test="roleCreateUser != null">
+                role_createuser,
+            </if>
+            <if test="roleUpdateTime != null">
+                role_updatetime,
+            </if>
+            <if test="roleUpdateUser != null">
+                role_updateuser,
+            </if>
+            <if test="roleDelTime != null">
+                role_deltime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="roleName != null">
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleDesc != null">
+                #{roleDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="roleState != null">
+                #{roleState,jdbcType=INTEGER},
+            </if>
+            <if test="roleCreateTime != null">
+                #{roleCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleCreateUser != null">
+                #{roleCreateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="roleUpdateTime != null">
+                #{roleUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleUpdateUser != null">
+                #{roleUpdateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="roleDelTime != null">
+                #{roleDelTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.fnsco.cms.model.Role">
+        update fns_cms_role
+        <set>
+            <if test="roleName != null">
+                role_name = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleDesc != null">
+                role_desc = #{roleDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="roleState != null">
+                role_state = #{roleState,jdbcType=INTEGER},
+            </if>
+            <if test="roleCreateTime != null">
+                role_createtime = #{roleCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleCreateUser != null">
+                role_createuser = #{roleCreateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="roleUpdateTime != null">
+                role_updatetime = #{roleUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleUpdateUser != null">
+                role_updateuser = #{roleUpdateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="roleDelTime != null">
+                role_deltime = #{roleDelTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where role_id = #{roleId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fnsco.cms.model.Role">
+    update fns_cms_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      role_desc = #{roleDesc,jdbcType=VARCHAR},
+      role_state = #{roleState,jdbcType=INTEGER},
+      role_createtime = #{roleCreateTime,jdbcType=TIMESTAMP},
+      role_createuser = #{roleCreateUser,jdbcType=VARCHAR},
+      role_updatetime = #{roleUpdateTime,jdbcType=TIMESTAMP},
+      role_updateuser = #{roleUpdateUser,jdbcType=VARCHAR},
+      role_deltime = #{roleDelTime,jdbcType=TIMESTAMP}
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fns_cms_role
+    </select>
+
+
+    <update id="deleteRole" parameterType="java.lang.Integer">
+    update fns_cms_role
+        set role_state = '0'
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+
+
+    <select id="queryRoleByUserID" resultMap="BaseResultMap">
+    SELECT * FROM fns_cms_role WHERE role_id in (
+          SELECT role_id FROM fns_cms_user_role WHERE user_id = #{userID}
+             )
+  </select>
+
+    <select id="pageList" resultMap="BaseResultMap" parameterType="com.fnsco.cms.model.Role">
+        select
+        <include refid="Base_Column_List"/>
+        from fns_cms_role
+        <!--<where>
+            <if test="role.roleName != null and role.roleName != '' ">
+                and role_name = #{role.roleName,jdbcType=VARCHAR}
+            </if>
+        </where>-->
+        where role_state = '1'
+        and role_name like concat ('%', #{role.roleName,jdbcType=VARCHAR}, '%')
+        order by role_id asc
+        limit #{start},#{limt}
+    </select>
+
+    <select id="pageListCount" resultType="java.lang.Integer" parameterType="com.fnsco.cms.model.Role">
+    select count(1) from fns_cms_role
+        where role_name like concat ('%', #{role.roleName,jdbcType=VARCHAR}, '%')
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Integer">
+        select max(role_id) from fns_cms_role
+    </select>
+
+</mapper>

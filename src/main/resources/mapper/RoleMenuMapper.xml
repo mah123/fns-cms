@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fnsco.cms.dao.RoleMenuMapper">
+    <resultMap id="BaseResultMap" type="com.fnsco.cms.model.RoleMenu">
+        <result column="id" property="Id" jdbcType="INTEGER"/>
+        <result column="role_id" property="roleId" jdbcType="INTEGER"/>
+        <result column="menu_id" property="menuId" jdbcType="INTEGER"/>
+        <association property="role" javaType="com.fnsco.cms.model.Role">
+            <id column="role_id" property="roleId" jdbcType="INTEGER"/>
+            <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+            <result column="role_desc" property="roleDesc" jdbcType="VARCHAR"/>
+            <result column="role_state" property="roleState" jdbcType="INTEGER"/>
+            <result column="role_createtime" property="roleCreateTime" jdbcType="TIMESTAMP"/>
+            <result column="role_createuser" property="roleCreateUser" jdbcType="VARCHAR"/>
+            <result column="role_updatetime" property="roleUpdateTime" jdbcType="TIMESTAMP"/>
+            <result column="role_updateuser" property="roleUpdateUser" jdbcType="VARCHAR"/>
+            <result column="role_deltime" property="roleDelTime" jdbcType="TIMESTAMP"/>
+        </association>
+
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+    id, role_id, menu_id
+  </sql>
+    <insert id="insert" parameterType="com.fnsco.cms.model.RoleMenu">
+    insert into fns_cms_role_menu (id, role_id, menu_id
+      )
+    values (#{Id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{menuId,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.fnsco.cms.model.RoleMenu">
+        insert into fns_cms_role_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="Id != null">
+                id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="menuId != null">
+                menu_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="Id != null">
+                #{Id,jdbcType=INTEGER},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="menuId != null">
+                #{menuId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+
+    <delete id="delete" parameterType="java.lang.Integer">
+    delete from fns_cms_role_menu
+    where id =  #{Id,jdbcType=INTEGER}
+  </delete>
+
+    <update id="update" parameterType="com.fnsco.cms.model.RoleMenu">
+    update fns_cms_role_menu
+    set
+      role_id = #{roleId,jdbcType=INTEGER},
+      menu_id = #{menuId,jdbcType=INTEGER}
+      where id = #{Id,jdbcType=INTEGER}
+  </update>
+</mapper>

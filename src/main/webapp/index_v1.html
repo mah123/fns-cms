@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <style type="text/css">
+        #report_main {
+            width: 50%;
+            height: 500px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<a class="J_menuItem" onclick="clickAddTab('appusermanage.html','77','这只是个首页')">这只是一个首页</a>
+<h1 style="color:#666;margin-left: 10px;font-size: 16px;">这只是一个首页</h1>
+<div id="report_main"></div>
+</body>
+<script src="js/bootstrap/jquery.min.js"></script>
+<script src="js/echarts/echarts.simple.min.js"></script>
+<script>
+    var win = window.parent.document.getElementById("addHref");
+
+    function clickAddTab(href, dataIndex, html) {
+        $(win).attr('href', href);
+        $(win).attr('data-index', dataIndex);
+        $(win).html(html);
+        win.click();
+    }
+</script>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('report_main'));
+    option = {
+        title: {
+            text: "某站点用户访问来源",
+            subtext: "纯属虚构",
+            x: "center"
+        },
+        tooltip: {
+            trigger: "item",
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: "vertical",
+            x: "left",
+            data: ["直接访问", "邮件营销", "联盟广告", "视频广告", "搜索引擎"]
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {
+                    show: true
+                },
+                dataView: {
+                    show: true,
+                    readOnly: true
+                },
+                restore: {
+                    show: true
+                },
+                saveAsImage: {
+                    show: true
+                }
+            }
+        },
+        calculable: true,
+        series: [
+            {
+                name: "访问来源",
+                type: "pie",
+                radius: "55%",
+                center: ["50%", "60%"],
+                data: [
+                    {
+                        value: 335,
+                        name: "直接访问"
+                    },
+                    {
+                        value: 310,
+                        name: "邮件营销"
+                    },
+                    {
+                        value: 234,
+                        name: "联盟广告"
+                    },
+                    {
+                        value: 135,
+                        name: "视频广告"
+                    },
+                    {
+                        value: 1548,
+                        name: "搜索引擎"
+                    }
+                ]
+            }
+        ]
+    };
+    myChart.setOption(option);
+</script>
+<script src="js/echarts/walden.js"></script>
+</html>

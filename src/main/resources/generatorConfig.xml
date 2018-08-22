@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry
+            location="F:\util\maven_repository\mysql\mysql-connector-java\5.1.42\mysql-connector-java-5.1.42.jar"/>
+    <context id="context1">
+        <!-- 是否生成注释 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.1.110:3306/mcms"
+                        userId="root" password="123456"/>
+
+        <!-- 生成的包名和工程名 -->
+        <javaModelGenerator targetPackage="com.fnsco.cms.model"
+                            targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="com.fnsco.cms.mapper"
+                         targetProject="src/main/resources"/>
+        <javaClientGenerator targetPackage="com.fnsco.cms.dao"
+                             targetProject="src/main/java" type="XMLMAPPER"/>
+
+        <!-- 数据库表 -->
+        <!--<table  tableName="fns_cms_user_token" domainObjectName="UserToken">
+            &lt;!&ndash; 设置别名 &ndash;&gt;
+            <columnOverride column="id" property="id" />
+            <columnOverride column="user_id" property="userId" />
+            <columnOverride column="token" property="token" />
+            <columnOverride column="expire_time" property="expireTime" />
+            <columnOverride column="update_time" property="updateTime" />
+        </table>-->
+    </context>
+</generatorConfiguration>

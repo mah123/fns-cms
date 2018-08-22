@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fnsco.cms.dao.BannerMapper">
+    <resultMap id="BaseResultMap" type="com.fnsco.cms.model.Banner">
+        <id column="banner_id" property="bannerId" jdbcType="INTEGER"/>
+        <result column="banner_url" property="bannerUrl" jdbcType="VARCHAR"/>
+        <result column="banner_size" property="bannerSize" jdbcType="DOUBLE"/>
+        <result column="banner_desc" property="bannerDesc" jdbcType="VARCHAR"/>
+        <result column="banner_uptime" property="bannerUpTime" jdbcType="TIMESTAMP"/>
+        <result column="banner_upuser" property="bannerUpUser" jdbcType="VARCHAR"/>
+        <result column="banner_changetime" property="bannerChangeTime" jdbcType="TIMESTAMP"/>
+        <result column="banner_changeuser" property="bannerChangeUser" jdbcType="VARCHAR"/>
+        <result column="banner_deltime" property="bannerDelTime" jdbcType="TIMESTAMP"/>
+        <result column="banner_state" property="bannerState" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    banner_id, banner_url, banner_size, banner_desc, banner_uptime, banner_upuser, banner_changetime, 
+    banner_changeuser, banner_deltime, banner_state
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from fns_cms_banner
+        where banner_id = #{bannerId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fns_cms_banner
+    where banner_id = #{bannerId,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="insert" parameterType="com.fnsco.cms.model.Banner">
+    insert into fns_cms_banner (banner_id, banner_url, banner_size, 
+      banner_desc, banner_uptime, banner_upuser, 
+      banner_changetime, banner_changeuser, banner_deltime, 
+      banner_state)
+    values (#{bannerId,jdbcType=INTEGER}, #{bannerUrl,jdbcType=VARCHAR}, #{bannerSize,jdbcType=DOUBLE}, 
+      #{bannerDesc,jdbcType=VARCHAR}, #{bannerUpTime,jdbcType=TIMESTAMP}, #{bannerUpUser,jdbcType=VARCHAR}, 
+      #{bannerChangeTime,jdbcType=TIMESTAMP}, #{bannerChangeUser,jdbcType=VARCHAR}, #{bannerDelTime,jdbcType=TIMESTAMP}, 
+      #{bannerState,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fnsco.cms.model.Banner">
+        insert into fns_cms_banner
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bannerId != null">
+                banner_id,
+            </if>
+            <if test="bannerUrl != null">
+                banner_url,
+            </if>
+            <if test="bannerSize != null">
+                banner_size,
+            </if>
+            <if test="bannerDesc != null">
+                banner_desc,
+            </if>
+            <if test="bannerUpTime != null">
+                banner_uptime,
+            </if>
+            <if test="bannerUpUser != null">
+                banner_upuser,
+            </if>
+            <if test="bannerChangeTime != null">
+                banner_changetime,
+            </if>
+            <if test="bannerChangeUser != null">
+                banner_changeuser,
+            </if>
+            <if test="bannerDelTime != null">
+                banner_deltime,
+            </if>
+            <if test="bannerState != null">
+                banner_state,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bannerId != null">
+                #{bannerId,jdbcType=INTEGER},
+            </if>
+            <if test="bannerUrl != null">
+                #{bannerUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="bannerSize != null">
+                #{bannerSize,jdbcType=DOUBLE},
+            </if>
+            <if test="bannerDesc != null">
+                #{bannerDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="bannerUpTime != null">
+                #{bannerUpTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bannerUpUser != null">
+                #{bannerUpUser,jdbcType=VARCHAR},
+            </if>
+            <if test="bannerChangeTime != null">
+                #{bannerChangeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bannerChangeUser != null">
+                #{bannerChangeUser,jdbcType=VARCHAR},
+            </if>
+            <if test="bannerDelTime != null">
+                #{bannerDelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bannerState != null">
+                #{bannerState,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.fnsco.cms.model.Banner">
+        update fns_cms_banner
+        <set>
+            <if test="bannerUrl != null">
+                banner_url = #{bannerUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="bannerSize != null">
+                banner_size = #{bannerSize,jdbcType=DOUBLE},
+            </if>
+            <if test="bannerDesc != null">
+                banner_desc = #{bannerDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="bannerUpTime != null">
+                banner_uptime = #{bannerUpTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bannerUpUser != null">
+                banner_upuser = #{bannerUpUser,jdbcType=VARCHAR},
+            </if>
+            <if test="bannerChangeTime != null">
+                banner_changetime = #{bannerChangeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bannerChangeUser != null">
+                banner_changeuser = #{bannerChangeUser,jdbcType=VARCHAR},
+            </if>
+            <if test="bannerDelTime != null">
+                banner_deltime = #{bannerDelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bannerState != null">
+                banner_state = #{bannerState,jdbcType=INTEGER},
+            </if>
+        </set>
+        where banner_id = #{bannerId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fnsco.cms.model.Banner">
+    update fns_cms_banner
+    set banner_url = #{bannerUrl,jdbcType=VARCHAR},
+      banner_size = #{bannerSize,jdbcType=DOUBLE},
+      banner_desc = #{bannerDesc,jdbcType=VARCHAR},
+      banner_uptime = #{bannerUpTime,jdbcType=TIMESTAMP},
+      banner_upuser = #{bannerUpUser,jdbcType=VARCHAR},
+      banner_changetime = #{bannerChangeTime,jdbcType=TIMESTAMP},
+      banner_changeuser = #{bannerChangeUser,jdbcType=VARCHAR},
+      banner_deltime = #{bannerDelTime,jdbcType=TIMESTAMP},
+      banner_state = #{bannerState,jdbcType=INTEGER}
+    where banner_id = #{bannerId,jdbcType=INTEGER}
+  </update>
+
+    <update id="deleteBanner" parameterType="java.lang.Integer">
+    update fns_cms_banner
+    set banner_state = 1
+    where banner_id = #{bannerId,jdbcType=INTEGER}
+  </update>
+
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fns_cms_banner
+
+    </select>
+</mapper>

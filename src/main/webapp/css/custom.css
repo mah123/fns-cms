@@ -1,0 +1,429 @@
+#side-menu .glyphicon-chevron-down, #side-menu .glyphicon-chevron-up {
+    float: right;
+}
+
+.bootstrap-table {
+    padding: 10px;
+}
+
+.bootstrap-table .table#bankTable {
+    padding: 0 !important;
+}
+
+.bootstrap-table .table#businessTable {
+    padding: 0 !important;
+}
+
+#businessToolbar {
+    padding: 0 10px;
+}
+
+table thead {
+    /*color: #fff;
+    background: #2f4050;*/
+}
+
+table a.remove {
+    color: #999;
+}
+
+table a.redact {
+    color: #428bca;
+}
+
+table a.redact span {
+    padding-left: 2px;
+}
+
+table a.details {
+    color: #428bca;
+}
+
+table a.remove, table a.redact, table a.details {
+    padding: 5px 10px;
+    border-radius: 3px;
+    width: 30px;
+    display: inline-block;
+}
+
+table td {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.form-group {
+    padding: 0 10px;
+}
+
+.form-group .btn {
+    margin: 5px;
+}
+
+.form-group .btn span.glyphicon {
+    margin-right: 2px;
+    font-size: 12px;
+}
+
+.navbar-header .navbar-minimalize {
+    font-size: 18px;
+    color: #2f4050;
+}
+
+.form-group .control-label {
+    display: inline-block;
+    padding-top: 8px;
+    min-width: 85px;
+}
+
+.form-group .form-control {
+    width: 72%;
+    width: -moz-calc(100% - 100px);
+    width: -webkit-calc(100% - 100px);
+    width: calc(100% - 100px);
+    display: inline-block;
+}
+
+.form-group .query-time .form-control {
+    width: 40%;
+    width: -moz-calc(50% - 56px);
+    width: -webkit-calc(50% - 56px);
+    width: calc(50% - 56px);
+}
+
+.form-group div {
+    margin: 5px 0;
+}
+
+/*弹框样式修改*/
+.modal {
+    /*filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;*/
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-body {
+    padding: 0;
+}
+
+.modal-body .nav {
+    background: #2f4050;
+}
+
+.modal-body .nav-tabs > li {
+    margin-bottom: 0;
+}
+
+.modal-body .nav-tabs > li > a {
+    border-radius: 0;
+    border: none;
+    margin: 0;
+    cursor: default;
+}
+
+.nav-tabs > li > a:focus, .nav-tabs > li > a:hover {
+    background-color: #2f4050;
+    color: #A7B1C2;
+}
+
+.modal-body .nav > li.active > a {
+    border-radius: 0;
+    border: none;
+    background-color: #fff;
+    color: #2f4050;
+}
+
+.modal-body .tab-content {
+    padding: 20px;
+}
+
+.modal-body .tab-content label {
+    margin-bottom: 2px;
+}
+
+.modal-body .col-sm-4, .modal-body .col-sm-12 {
+    margin-bottom: 15px;
+}
+
+.contact-list, .terminal-list, .channel-list, .bankCard-list {
+    padding: 10px 20px 0 20px;
+    background: #f4f4f4;
+    margin: 10px 0;
+    position: relative;
+}
+
+#btn_addContact {
+    font-size: 12px;
+}
+
+.remove-icon {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    background: #d43f3a;
+    color: #fff;
+    cursor: pointer;
+}
+
+.remove-icon span {
+    height: 20px;
+    line-height: 20px;
+    top: 0;
+}
+
+/*下一步按钮*/
+a.nextBtn, a.saveBtn, a.staticBtn {
+    margin: 10px auto;
+    width: 20%;
+    height: 35px;
+    line-height: 35px;
+    display: block;
+    text-align: center;
+    background: #2f4050;
+    color: #fff;
+    border-radius: 5px;
+}
+
+a.nextBtn:hover, a.saveBtn:hover {
+    color: #fff;
+}
+
+/*增加商户弹框修改*/
+.fileImgName {
+    padding: 5px 15px;
+    background: #f4f4f4;
+    border-radius: 3px;
+    float: left;
+    margin-right: 5px;
+    width: 160px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.previewfileImg {
+    padding: 5px;
+    background: #428bca;
+    color: #fff;
+    border-radius: 3px;
+    /* margin: 0 3px; */
+    position: relative;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.previewfileImg img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    opacity: 0;
+    z-index: 999;
+}
+
+.deletefileImg {
+    padding: 5px;
+    background: #ed5565;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 12px;
+    display: inline-block;
+    margin: 0 3px;
+}
+
+.previewfileImg span, .deletefileImg span {
+    margin-right: 3px;
+}
+
+.previewfileImg:hover, .deletefileImg:hover {
+    color: #fff;
+}
+
+.uploadify {
+    text-align: center;
+    background: #428bca;
+    color: #fff;
+    border-radius: 3px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.uploadify .swfupload {
+    left: 0;
+}
+
+.form-control[readonly] {
+    background-color: #fff;
+    cursor: default;
+}
+
+/*修改商户信息*/
+.editBtn_edit, .editBtn_save {
+    margin-bottom: 10px;
+}
+
+.editBtn_save {
+    display: none;
+}
+
+.editBtn_edit span, .editBtn_save span {
+    margin-right: 3px;
+}
+
+/*修改账户密码*/
+.modal-lg .input-group {
+    margin: 10px;
+}
+
+#changePassword .changePassword-mian {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: table;
+}
+
+#changePassword .changePassword-mian .modal-dialog {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#changePassword .changePassword-mian .modal-dialog .modal-content {
+    width: 565px;
+    margin: 0 auto;
+    border-radius: 0;
+}
+
+#changePassword .changePassword-mian .modal-dialog .modal-header {
+    border: 0;
+}
+
+.login-header {
+    height: 140px;
+    border-bottom: 2px solid #f5f5f5;
+    font-size: 24px;
+    color: #666;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.indexPageUserName {
+    padding-left: 3px;
+}
+
+.glyphicon-user {
+    font-size: 13px;
+}
+
+.login-header .logo {
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.login-header .logo img {
+    width: 60px;
+}
+
+.forget-body {
+    width: 386px;
+    margin: 40px auto 40px auto;
+}
+
+.forget-input-panel input {
+    border: none;
+    float: right;
+    height: 20px;
+    width: 300px;
+    outline: none;
+}
+
+.username-input, .password-input {
+    height: 50px;
+    padding: 15px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+}
+
+.forget-input-panel .left {
+    float: left;
+}
+
+.forget-input-panel .icon {
+    height: 20px;
+    padding-right: 10px;
+    margin-right: 20px;
+    border-right: 1px solid #ccc;
+}
+
+.forget-btn {
+    height: 50px;
+    line-height: 50px;
+    background: #2f4050;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+}
+
+.changePage {
+    font-size: 14px;
+    color: #666;
+    padding-top: 20px;
+    cursor: pointer;
+}
+
+/*用户管理*/
+.shopRoleList {
+    padding: 10px 20px 16px 20px;
+    background: #f4f4f4;
+    margin: 10px 0;
+    position: relative;
+}
+
+#pushView {
+    width: 100%;
+    background: #f4f4f4;
+    margin: 10px 0;
+    padding: 15px;
+    position: relative;
+    background: #f4f4f4;
+    color: #666;
+    display: none;
+}
+
+#pushView img {
+    width: 300px;
+    height: 150px;
+}
+
+.imgRemind {
+    text-align: center;
+    padding-top: 15px;
+    color: #999;
+    font-size: 12px;
+}
+
+/*角色管理*/
+
+.modal-open-custom {
+    overflow: hidden;
+}
+
+.modal-open-custom .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#businessTable {
+    padding: 0;
+}

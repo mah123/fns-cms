@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>杭州法奈昇大数据平台</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/chart.css">
+</head>
+<body>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <!-- <ol class="carousel-indicators">
+      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol> -->
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div class="container chart">
+                <div class="container-title">
+                    杭州法奈昇大数据平台
+                </div>
+                <div class="box">
+                    <div class="left-box">
+                        <div class="china-chart">
+                            <div id="chart"></div>
+                            <div class="addres"><img src="img/fnsLogo.png"></div>
+                        </div>
+                    </div>
+                    <div class="right-box">
+                        <div class="total">
+                            <div class="total-num">
+                                <span class="counter" id="total-number"></span>元
+                            </div>
+                            <div class="total-count">
+                                <span class="counter" id="total-count-num"></span>笔
+                            </div>
+                        </div>
+                        <div class="time" id="scrollDiv">
+                            <div class="scroll" class="scrollText">
+                                <ul id="scroll-ul">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="item">
+          <div class="container">
+            <img src="img/timg.jpg" alt="公司简介">
+          </div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <img src="img/timg.jpg" alt="公司简介">
+          </div>
+        </div> -->
+    </div>
+
+    <!-- Controls -->
+    <!--  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+       <span class="sr-only">Previous</span>
+     </a>
+     <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+       <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+       <span class="sr-only">Next</span>
+     </a> -->
+</div>
+
+</body>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/bmap.js"></script>
+<script type="text/javascript" src="js/china.js"></script>
+<script type="text/javascript" src="js/chart.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/scroll.js"></script>
+<script type="text/javascript" src="js/countup.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script type="text/javascript">
+    var totalCountNum;
+    var totalNum;
+    var amtTot;
+    var count;
+    var addRandom;
+    var addRandom1;
+    var addAmt = new Number();
+    var addCount = new Number();
+
+    var data = new Date();
+    var month = data.getMonth() + 1;
+    var seconds = data.getSeconds();
+    var time = data.getFullYear() + '-' + (data.getMonth() + 1);
+    console.log(data.getFullYear(), data.getMonth() + 1, time, seconds);
+
+    function changeValue(target, startVal, endVal, decimals, duration, options) {
+        var options = {
+            useEasing: true, //使用缓和效果
+            useGrouping: true, //使用分组效果
+            separator: ',', //分离器，数据够三位，例如100,000
+            decimal: '.', //小数点分割，例如：10.00
+            prefix: '', //第一位默认数字
+            suffix: '' //最后一位默认数字
+        };
+        var demo = new CountUp(target, startVal, endVal, decimals, duration, options);
+        demo.start();
+        // target = 目标元素的 ID；
+        // startVal = 开始值；
+        // endVal = 结束值；
+        // decimals = 小数位数，默认值是0；
+        // duration = 动画延迟秒数，默认值是2；
+    }
+
+    function getValue(type) {
+        $.ajax({
+            url: '../h5/report/getTradeDataTotle',
+            type: 'get',
+            success: function (data) {
+                if (!type) {
+                    amtTot = Number(Math.round(data.data.amtTot));
+                    count = Number(Math.round(data.data.count));
+                    changeValue('total-number', 0, amtTot, 0, 2);
+                    changeValue('total-count-num', 0, count, 0, 2);
+                    totalNum = Number(Math.round(data.data.amtTot));
+                    totalCountNum = Number(data.data.count);
+                    // console.log("默认请求:"+totalNum,totalCountNum);
+                } else {
+                    amtTot = Number(Math.round(data.data.amtTot));
+                    count = Number(Math.round(data.data.count));
+                    showTot = amtTot + addAmt;
+                    showCount = count + addCount;
+                    console.log(showTot, showCount);
+                    changeValue('total-number', totalNum, showTot, 0, 2);
+                    changeValue('total-count-num', totalCountNum, showCount, 0, 2);
+                    totalNum = showTot;
+                    totalCountNum = showCount;
+                    // console.log("请求来的值:"+amtTot,count,"显示的值:"+(amtTot+addAmt),count+addCount);
+                }
+            }
+        })
+    }
+
+    function changeVal() {
+        newTotalNum = totalNum + parseInt(Math.random() * 100);
+        newTotalCountNum = totalCountNum + parseInt(Math.random() * 10);
+        changeValue('total-number', totalNum, newTotalNum, 0, 2);
+        changeValue('total-count-num', totalCountNum, newTotalCountNum, 0, 2);
+        // $("#scroll-ul").append('<li><div class="card-num">支付宝支付</div><div class="trading"><span class="trading-title">交易金额  ￥</span><span class="trading-num">'+parseInt(Math.random()*1000)+'</span></div></li>');
+        addRandom = newTotalNum - totalNum;
+        addRandom1 = newTotalCountNum - totalCountNum;
+        totalNum = newTotalNum;
+        totalCountNum = newTotalCountNum;
+        addAmt = Number(addRandom + addAmt);
+        addCount = Number(addRandom1 + addCount);
+        // console.log("新增金额："+addAmt,"新增笔数："+addCount);
+    }
+
+    setInterval(function () {
+        changeVal();
+    }, 3000);
+
+    //格式化时间
+    Date.prototype.Format = function (fmt) { //author: meizz
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    };
+
+    var mockList = [
+        {"amt": "25", "payType": "微信支付", "createTime": "2018-02-01 11:45:27", "termId": "28644056"},
+        {"amt": "120", "payType": "支付宝支付", "createTime": "2018-02-01 11:44:56", "termId": "28644055"},
+        {"amt": "20", "payType": "微信支付", "createTime": "2018-02-01 11:44:10", "termId": "28644056"},
+        {"amt": "59", "payType": "刷卡支付", "createTime": "2018-02-01 11:32:42", "termId": "26715796"},
+        {"amt": "1200", "payType": "刷卡支付", "createTime": "2018-02-01 11:32:05", "termId": "26715796"},
+        {"amt": "25", "payType": "支付宝支付", "createTime": "2018-02-01 11:28:49", "termId": "28644055"},
+        {"amt": "2670", "payType": "刷卡支付", "createTime": "2018-02-01 11:08:21", "termId": "26338093"},
+        {"amt": "1880", "payType": "刷卡支付", "createTime": "2018-02-01 10:55:24", "termId": "26338093"},
+        {"amt": "2250", "payType": "刷卡支付", "createTime": "2018-02-01 10:54:31", "termId": "26338093"},
+        {"amt": "8500", "payType": "刷卡支付", "createTime": "2018-02-01 10:52:44", "termId": "26673416"},
+        {"amt": "110", "payType": "支付宝支付", "createTime": "2018-02-01 10:47:41", "termId": "28504828"},
+        {"amt": "6000", "payType": "刷卡支付", "createTime": "2018-02-01 10:44:06", "termId": "28504865"},
+        {"amt": "264", "payType": "微信支付", "createTime": "2018-02-01 10:40:06", "termId": "28504831"},
+        {"amt": "45", "payType": "支付宝支付", "createTime": "2018-02-01 10:39:33", "termId": "28504831"},
+        {"amt": "450", "payType": "刷卡支付", "createTime": "2018-02-01 10:37:09", "termId": "28488905"},
+        {"amt": "1080", "payType": "刷卡支付", "createTime": "2018-02-01 10:30:24", "termId": "28504880"},
+        {"amt": "60", "payType": "支付宝支付", "createTime": "2018-02-01 10:25:04", "termId": "28504831"},
+        {"amt": "500", "payType": "微信支付", "createTime": "2018-02-01 10:24:15", "termId": "94304764"},
+        {"amt": "20000", "payType": "刷卡支付", "createTime": "2018-02-01 10:19:57", "termId": "28542726"},
+        {"amt": "25", "payType": "微信支付", "createTime": "2018-02-01 10:19:55", "termId": "28504850"},
+        {"amt": "60", "payType": "微信支付", "createTime": "2018-02-01 10:12:45", "termId": "28504831"},
+        {"amt": "289", "payType": "微信支付", "createTime": "2018-02-01 10:11:46", "termId": "28504831"},
+        {"amt": "15000", "payType": "刷卡支付", "createTime": "2018-02-01 10:08:59", "termId": "28504906"},
+        {"amt": "3000", "payType": "刷卡支付", "createTime": "2018-02-01 10:07:07", "termId": "28266585"},
+        {"amt": "10000", "payType": "刷卡支付", "createTime": "2018-02-01 10:19:57", "termId": "28542726"},
+        {"amt": "85", "payType": "微信支付", "createTime": "2018-02-01 10:19:55", "termId": "28504850"},
+        {"amt": "70", "payType": "微信支付", "createTime": "2018-02-01 10:12:45", "termId": "28504831"},
+        {"amt": "273", "payType": "微信支付", "createTime": "2018-02-01 10:11:46", "termId": "28504831"},
+        {"amt": "17000", "payType": "刷卡支付", "createTime": "2018-02-01 10:08:59", "termId": "28504906"},
+        {"amt": "2000", "payType": "刷卡支付", "createTime": "2018-02-01 10:07:07", "termId": "28266585"},
+        {"amt": "1580", "payType": "刷卡支付", "createTime": "2018-02-01 10:12:45", "termId": "28504831"},
+    ];
+
+    function getList(date, size) {
+        dateTime = date + '-01 00:00:00';
+        $.ajax({
+            url: '../h5/report/getTradeDataList',
+            type: 'get',
+            data: {'startDate': dateTime, 'pageSize': size},
+            success: function (result) {
+                var dataList = result.data;
+                if (dataList.length < 32) {
+                    mockList = mockList.concat(dataList);
+                    for (var i = 0; i < mockList.length; i++) {
+                        $("#scroll-ul").append('<li><div class="card-num">' + mockList[i].payType + '</div>' +
+                            '<div class="trading"><span class="trading-title">￥</span>' +
+                            '<span class="trading-num">' + mockList[i].amt + '</span></div></li>');
+                    }
+                } else {
+                    for (var j = 0; j < dataList.length; j++) {
+                        $("#scroll-ul").append('<li><div class="card-num">' + dataList[j].payType + '</div>' +
+                            '<div class="trading"><span class="trading-title">￥</span>' +
+                            '<span class="trading-num">' + dataList[j].amt + '</span></div></li>');
+                    }
+                }
+
+            }
+        })
+    }
+
+    var i = 1;
+    setInterval(function () {
+        $("#scroll-ul").animate({top: "-" + Number(51 * i) + "px"});
+        setTimeout(function () {
+            $("#scroll-ul").find("li:eq(0)").remove();
+            $("#scroll-ul").css({top: "0px"});
+        }, 1000)
+    }, 3000);
+
+    //设置
+    $(document).ready(function () {
+        getValue();
+        getList(time, 48);
+    });
+    setInterval(function () {
+        // console.log("重新刷新了");
+        getValue("0");
+        getList(time, 24);
+        // $("#scrollDiv").textSlider({line:1,speed:800,timer:3000});
+    }, 72000)
+    // $('#carousel-example-generic').carousel(
+    // 	{
+    // 	  interval: 300000,
+    // 	  pause:null
+    // 	}
+    // );
+</script>
+</html>

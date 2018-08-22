@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="法奈昇大数据平台">
+    <meta name="description" content="法奈昇大数据平台">
+    <meta http-equiv="pragma" content="no -cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/><![endif]-->
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>首页</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            min-width: 1024px;
+        }
+
+        body {
+            overflow: hidden;
+            background: #656464;
+            font-family: "微软雅黑";
+            */ font-family: "HanHei SC", "微软雅黑", "PingHei", "PingFang SC", "STHeitiSC-Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .background-panel {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 1;
+            overflow: hidden;
+            top: 0;
+        }
+
+        .background-panel img {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        .fc-login-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: table;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .fc-logon-main {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            width: 565px;
+        }
+
+        .login-content {
+            width: 565px;
+            margin: auto;
+            background: #FFF;
+            position: relative;
+            padding-bottom: 60px;
+        }
+
+        .login-header {
+            height: 120px;
+            border-bottom: 2px solid #f5f5f5;
+            font-size: 24px;
+            color: #666;
+            padding-top: 25px;
+        }
+
+        .login-header .logo {
+            height: 47px;
+        }
+
+        .login-body .nav li {
+            float: left;
+            width: 193px;
+            height: 70px;
+            line-height: 70px;
+            margin-bottom: -2px;
+            color: #333;
+        }
+
+        .login-body {
+            width: 386px;
+            margin: 40px auto 0 auto;
+        }
+
+        input {
+            border: none;
+            float: right;
+            height: 20px;
+            width: 300px;
+            outline: none;
+        }
+
+        .username-input, .password-input {
+            height: 20px;
+            padding: 15px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .icon {
+            height: 20px;
+            padding-right: 10px;
+            margin-right: 20px;
+            border-right: 1px solid #ccc;
+        }
+
+        .login-btn {
+            height: 50px;
+            line-height: 50px;
+            background: #2f4050;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+
+        .changePage {
+            font-size: 14px;
+            color: #666;
+            padding-top: 20px 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="background-panel"></div>
+<div class="fc-login-panel">
+    <div class="fc-logon-main">
+        <div class="login-content" style="">
+            <div class="login-header">
+                <div class="logo">
+                    <img src="login/lkl_login_logo_60.png">
+                </div>
+                <p>CMS后台管理系统</p>
+            </div>
+            <div class="login-body">
+                <form id="login_info_form" name="login" method="post" action="/web/doLogin">
+                    <div class="login-input-panel">
+                        <div class="username-input">
+                            <div class="icon left">
+                                <img src="login/6-25-19.png">
+                            </div>
+                            <input type="text" id="account" name="userAccount" value="" placeholder="请输入账号">
+                        </div>
+                        <div class="password-input">
+                            <div class="icon left">
+                                <img src="login/6-25-14.png">
+                            </div>
+                            <input type="password" id="password" name="userPassword" value="" placeholder="请输入密码">
+                        </div>
+                        <button type="button" class="login-btn" id="btn_submit">登录</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/bootstrap/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/fnsco/common.js"></script>
+<script type="text/javascript">
+    //登录
+    $(function () {
+        /*var aduser = $.cookie('cookie_user_key');
+        if(aduser)
+        {
+            $.cookie('cookie_user_key',null);
+        }
+        $('#login_info_form').attr('action',PROJECT_NAME+'/web/doLogin');*/
+    });
+</script>
+<script>
+    (function () {
+        var imgs = ['login/bg_2.png', 'login/bg_3.png', 'login/bg_1.jpg'];
+        var $background = $('.background-panel'), i = 0, img = new Image(), zIndex = 0, $imgs = [], speed = 5000,
+            fadeTo = 800;
+
+        function showBackground() {
+            if (!$imgs[i]) {
+                img.onload = function () {
+                    $imgs.push($('<img class="" src="' + this.src + '" id="img_' + i + '">'))
+                    $background.append($imgs[i])
+                    setBackgroundImageZIndex();
+                    imgAuto();
+                }
+                img.src = imgs[i];
+            } else {
+                setBackgroundImageZIndex();
+            }
+        }
+
+        function setBackgroundImageZIndex() {
+            $imgs[i].css({
+                'zIndex': zIndex++
+            }).hide().fadeTo(fadeTo, 1);
+            ++i;
+            if (i == imgs.length) {
+                i = 0;
+            }
+            setTimeout(function () {
+                showBackground();
+            }, speed)
+        }
+
+        function imgAuto() {
+            var img = $background.find('img').eq(0);
+            if ($('#background-style').length == 0) {
+                $('body').append('<style id="background-style"></style>')
+            }
+            if (img.width() / img.height() > $background.width() / $background.height()) {
+                $('#background-style').html('.background-panel img {height:100%;width:auto;}')
+            } else {
+                $('#background-style').html('.background-panel img {width:100%;height:auto;}')
+            }
+        }
+
+        showBackground();
+        $(window).resize(function () {
+            imgAuto();
+        });
+    })();
+    //登录
+    $('#btn_submit').click(function () {
+        console.log("1111111111")
+        $.ajax({
+            url: PROJECT_NAME + '/web/doLogin',
+            type: 'POST',
+            data: $('#login_info_form').serialize(),
+            success: function (data) {
+                //alert(data)
+                if (data.success) {
+                    // alert(data.success)
+                    window.location = 'index.html';
+                } else {
+                    alert(data.message);
+                }
+            }
+        });
+        return false;
+    });
+</script>
+</html>

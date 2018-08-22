@@ -1,0 +1,157 @@
+body {
+    background: #fff;
+}
+
+.login-body {
+    width: 100%;
+    margin: 0 auto;
+}
+
+ul.cl {
+    border-bottom: 2px solid #ebebeb;
+}
+
+.username-input .icon img {
+    margin-top: 3px;
+}
+
+.login-input-panel .password-input {
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.login-input-panel .password-input .border {
+    height: 2rem;
+    padding: 0 0.5rem;
+}
+
+.login-input-panel .username-input {
+    margin-top: 1.5rem;
+    height: 2rem;
+    margin-bottom: 1rem;
+}
+
+.login-input-panel .username-input .border {
+    border-bottom: 1px solid #ebebeb;
+    line-height: 2rem;
+    height: 2rem;
+    padding: 0 0.5rem;
+}
+
+.login-input-panel .icon {
+    width: 1.5rem;
+    height: 1rem;
+    margin-top: 0.45rem;
+    padding-left: 2px;
+    position: relative;
+}
+
+.login-input-panel input {
+    width: 13rem;
+    height: 1.5rem;
+    margin-left: 0.3rem;
+    margin-top: 0.25rem;
+    border: none;
+    font-size: 0.65rem;
+}
+
+.login-input-panel input#password {
+    width: 11rem;
+}
+
+.login-btn {
+    width: 90%;
+    margin: 0 auto;
+    background: #3595FF;
+    color: #FFF;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    font-size: 0.7rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.v-code > div.left {
+    height: 2rem;
+    line-height: 2rem;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+}
+
+.v-code {
+    height: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.v-code input {
+    width: 8rem;
+}
+
+#verycode {
+    padding-right: 0.5rem;
+}
+
+.v-code .right {
+    width: 5rem;
+    overflow: hidden;
+    height: 1rem;
+    line-height: 1rem;
+    margin: 0.5rem 0;
+    cursor: pointer;
+    font-size: 0.55rem;
+    color: #333;
+    border-left: 1px solid #333;
+    float: right;
+    text-align: center;
+}
+
+.right button {
+    background: transparent;
+}
+
+.right button[disabled] {
+    color: #999;
+}
+
+.login-input-panel .icon img {
+    position: absolute;
+    margin: 0 !important;
+    top: 2px;
+    left: 34%;
+    height: 100%;
+}
+
+.left {
+    float: left;
+}
+
+.password-input .right {
+    float: right;
+    width: 2rem;
+    height: 2rem;
+    line-height: 0;
+    text-align: center;
+}
+
+.right img {
+    margin-top: 0.75rem;
+    width: 0.65rem;
+}
+
+input.getCodeBtn {
+    background: none;
+    height: 1rem;
+    margin: 0;
+    padding: 0;
+    line-height: 1rem;
+    width: 5.2rem;
+}
+
+.skip {
+    color: #3595FF;
+    display: block;
+    margin-top: 2rem;
+    font-size: 0.65rem;
+    text-align: center;
+}

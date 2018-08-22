@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="pragma" content="no -cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+    <title>系统用户管理-法奈昇大数据平台</title>
+    <meta name="keywords" content="法奈昇大数据平台">
+    <meta name="description" content="法奈昇大数据平台">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="js/bootstrap/css/font-awesome.css" rel="stylesheet">
+    <link href="css/plugins/ztree/metroStyle/metroStyle.css" rel="stylesheet">
+    <link href="css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+<div class="panel-body animated fadeInRight">
+    <div class="panel panel-default">
+        <!-- 搜索条件 -->
+        <form id="formSearch" class="form-horizontal">
+            <div class="form-group" style="margin-top:15px">
+                <div class="row col-sm-10">
+                    <div class="col-sm-4">
+                        <label class="control-label" for="name">账号：</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                </div>
+                <div class="col-sm-2" style="text-align: right;">
+                    <button type="button" id="btn_query" class="btn btn-primary"
+                            onclick="javascript:queryEvent('table');"><span class="glyphicon glyphicon-search"></span>查询
+                    </button>
+                    <button type="button" id="btn_reset" class="btn btn-default"
+                            onclick="javascript:resetEvent('formSearch','table');"><span
+                            class="glyphicon glyphicon-refresh"></span>重置
+                    </button>
+                </div>
+            </div>
+        </form>
+        <!-- start -->
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div id="toolbar">
+                            <button id="btn_add" type="button" class="btn btn-success">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                            </button>
+                            <button id="btn_edit" type="button" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+                            </button>
+                            <button id="btn_delete" type="button" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                            </button>
+                        </div>
+                        <table id="table"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end  -->
+    </div>
+</div>
+<!-- 新增 -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModelLabel" data-backdrop="static"
+     data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="addModalLabel">新增</h4>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="control-label" for="username">账号：</label>
+                            <input type="text" class="form-control" id="username" placeholder="账号" name="userAccount"
+                                   required="required" placeholder="登录账户">
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label" for="password">密码：</label>
+                            <input type="text" class="form-control" id="password" name="userPassword"
+                                   placeholder="密码最少6位">
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label" for="realname">真实姓名：</label>
+                            <input type="text" class="form-control" id="realname" name="userRealname"
+                                   placeholder="真实姓名">
+                        </div>
+                        <div id="mobilehide" class="col-sm-4">
+                            <label class="control-label" for="mobile">手机号：</label>
+                            <input type="text" class="form-control" id="mobile" name="userTelphone" required="required"
+                                   placeholder="手机号">
+                        </div>
+                        <div id="sexhide" class="col-sm-4">
+                            <label class="control-label " for="sex">性别：</label>
+                            <select id="sex" name="userSex" class="form-control">
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </div>
+                        <!--<div id="aliasnamehide" class="col-sm-4">
+                          <label class="control-label" for="aliasname">花名：</label>
+                          <input type="text" class="form-control" id="aliasname" name="aliasname" required="required" placeholder="花名">
+                      </div>-->
+                        <!--<div class="col-sm-4">
+                            <label class="control-label" for="department">所属部门：</label>
+                            <input type="text" class="form-control" id="department" name="department" readonly="readonly" placeholder="所属部门">
+                            <input type="hidden" class="form-control" id="departId" name="departId" >
+                        </div>-->
+                        <div class="col-sm-4">
+                            <label class="control-label " for="status">状态：</label>
+                            <select id="status" name="status" class="form-control">
+                                <option value="1">正常</option>
+                                <option value="2">禁用</option>
+                            </select>
+                        </div>
+                        <div id="remarkhide" class="col-sm-8">
+                            <label class="control-label" for="remark">备注：</label>
+                            <textarea id="remark" name="remark" class="form-control" placeholder="最多50个字"
+                                      rows="2"></textarea>
+                        </div>
+                        <div>
+                            <!--<div class="col-sm-12">
+                                <label class="control-label" for="role">角色：</label>
+                                <div class="col-sm-12" id="role">
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="tab-content">
+                            <div class="form-group">
+                                <div class="col-sm-2 control-label"></div>
+                                <button id="btn_yes" type="button" class="btn btn-primary">
+                                    <span aria-hidden="true"></span>确认添加
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    >
+</div>
+>
+<!-- 修改 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="editModalLabel">修改</h4>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="control-label" for="username1">账号：</label>
+                            <input type="text" disabled="disabled" class="form-control" id="username1" placeholder="用户"
+                                   name="userAccount" required="required" placeholder="登录账户">
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label" for="realname1">真实姓名：</label>
+                            <input type="text" class="form-control" id="realname1" name="userRealName"
+                                   placeholder="真实姓名">
+                        </div>
+                        <div id="mobile1hide" class="col-sm-4">
+                            <label class="control-label" for="mobile1">手机号：</label>
+                            <input type="text" class="form-control" id="mobile1" name="userTelphone" required="required"
+                                   placeholder="手机号">
+                        </div>
+                        <!-- <div id="sex1hide" class="col-sm-4">
+                                <label class="control-label " for="sex1">性别：</label>
+                                <select id="sex1" name="sex" class="form-control">
+                                   <option value="1">男</option>
+                                   <option value="2">女</option>
+                                </select>
+                         </div>-->
+                        <div id="aliasname1hide" class="col-sm-4">
+                            <label class="control-label" for="aliasname1">别名：</label>
+                            <input type="text" class="form-control" id="aliasname1" name="userNickName"
+                                   required="required" placeholder="花名">
+                        </div>
+                        <!--<div class="col-sm-4">
+                            <label class="control-label" for="department1">所属部门：</label>
+                            <input type="text" class="form-control" id="department1" name="department" readonly="readonly" placeholder="所属部门">
+                            <input type="hidden" class="form-control" id="departId1" name="departId1" >
+                        </div>-->
+                        <div class="col-sm-4">
+                            <label class="control-label " for="status1">状态：</label>
+                            <select id="status1" name="userState" class="form-control">
+                                <option value="1">正常</option>
+                                <option value="2">禁用</option>
+                            </select>
+                        </div>
+                        <!--<div id="remark1hide" class="col-sm-8">
+                        <label class="control-label" for="remark1">备注：</label>
+                        <textarea id="remark1" name="remark1" class="form-control" placeholder="最多50个字" rows="2"></textarea>
+                    </div>-->
+                        <div class="col-sm-12">
+                            <label class="control-label" for="role">角色：</label>
+                            <div class="col-sm-12" id="role1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="tab-content">
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label"></div>
+                        <button id="btn_yes1" type="button" class="btn btn-primary">
+                            <span aria-hidden="true"></span>确认修改
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 选择部门 -->
+<!--<div id="deptLayer" style="display: none;padding:10px;">
+	<ul id="deptTree" class="ztree"></ul>
+</div>-->
+
+<script src="js/bootstrap/jquery.min.js"></script>
+<script src="js/bootstrap/js/bootstrap.min.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="js/plugins/bootstrap-table/tableExport.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-table-editable.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-editable.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+<script src="js/plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="js/fnsco/common.js"></script>
+<script src="js/fnsco/url.js"></script>
+<script src="js/layer/layer.js"></script>
+<script type="text/javascript">
+    //在页面加载完成之后动态加载，避免因为缓存问题导致数据展示不对(在不人工清理缓存情况下)
+    loadJSRandom(document, "js/fnsco/user.js");
+</script>
+</body>

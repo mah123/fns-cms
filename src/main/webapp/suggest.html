@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="pragma" content="no -cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+    <title>反馈管理-法奈昇大数据平台</title>
+    <meta name="keywords" content="法奈昇大数据平台">
+    <meta name="description" content="法奈昇大数据平台">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="js/bootstrap/css/font-awesome.css" rel="stylesheet">
+    <link href="css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="panel-body animated fadeInRight">
+    <div class="panel panel-default">
+        <!-- 搜索条件 -->
+        <form id="formSearch" class="form-horizontal">
+            <div class="form-group" style="margin-top:15px">
+                <div class="row col-sm-10">
+                    <div class="col-sm-5 query-time">
+                        <label class="control-label" for="releaseTime">提交时间:</label>
+                        <button type="button" id="btn_" class="btn btn-default"
+                                onclick="javascript:queryweek('table');">本周
+                        </button>
+                        <button type="button" id="btn_reset" class="btn btn-default"
+                                onclick="javascript:querymonth('table');">本月
+                        </button>
+                    </div>
+                    <div class="col-sm-5 query-time">
+                        <input type="text" value="" class="form-control" id="datetimepicker1" name="startTime"> -
+                        <input type="text" value="" class="form-control" id="datetimepicker2" name="endTime">
+                    </div>
+                </div>
+                <div class="col-sm-2" style="text-align: right;">
+                    <button type="button" id="btn_query" class="btn btn-primary"
+                            onclick="javascript:queryEvent('table');"><span class="glyphicon glyphicon-search"></span>查询
+                    </button>
+                    <button type="button" id="btn_reset" class="btn btn-default"
+                            onclick="javascript:resetEvent('formSearch');"><span
+                            class="glyphicon glyphicon-refresh"></span>重置
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- 表格组件 -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <!--                      <div id="toolbar"> -->
+                    <!--                          <button id="btn_add" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"> -->
+                    <!--                              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增 -->
+                    <!--                          </button> -->
+                    <!--                      </div> -->
+                    <table id="table"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- detailsModel详情 start -->
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModelLabel"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="editModalLabel">反馈详情</h4>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <label class="control-label" for="mobile">手机号：</label>
+                            <input type="text" class="form-control" id=mobile name="mobile" required="required">
+                        </div>
+                        <div class="col-sm-8">
+                            <label class="control-label" for="userName">姓名：</label>
+                            <input type="text" class="form-control" id="userName" name="userName">
+                        </div>
+                        <div class="col-sm-8">
+                            <label class="control-label" for="submitTime">反馈时间：</label>
+                            <input type="text" class="form-control" id="submitTime" name="submitTime">
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="control-label" for="content">内容：</label>
+                            <textarea id="content" name="content" class="form-control" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/bootstrap/jquery.min.js"></script>
+<script src="js/bootstrap/js/bootstrap.min.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="js/plugins/bootstrap-table/tableExport.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-table-editable.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-editable.js"></script>
+<script src="js/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+<script src="js/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="js/layer/layer.js"></script>
+<script type="text/javascript" src="js/fnsco/common.js"></script>
+<script type="text/javascript">
+    //在页面加载完成之后动态加载，避免因为缓存问题导致数据展示不对(在不人工清理缓存情况下)
+    loadJSRandom(document, "js/fnsco/suggest.js");
+</script>
+</body>

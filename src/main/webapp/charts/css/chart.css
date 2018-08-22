@@ -1,0 +1,160 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "微软雅黑";
+}
+
+.container {
+    width: 1920px;
+    height: 1080px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.container.chart {
+    background: url(../img/chartBg.jpg) no-repeat top left;
+}
+
+.container-title {
+    width: 100%;
+    height: 90px;
+    line-height: 75px;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    background: url(../img/headerBg.png) no-repeat center;
+}
+
+.left-box {
+    float: left;
+}
+
+.right-box {
+    float: right;
+}
+
+.china-chart {
+    width: 1204px;
+    height: 990px;
+    position: relative;
+}
+
+#chart {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.addres {
+    position: absolute;
+    z-index: 999;
+    color: #fff;
+    right: 325px;
+    bottom: 350px;
+    font-size: 12px;
+}
+
+.addres img {
+    width: 30px;
+    height: 30px;
+}
+
+.right-box {
+    float: right;
+    /*width: 300px;*/
+    width: 690px;
+    height: 790px;
+    padding: 80px 0;
+}
+
+.total {
+    width: 525px;
+    height: 322px;
+    background: url(../img/total.png) no-repeat center;
+    position: relative;
+    margin: 0 auto;
+}
+
+.total div {
+    position: absolute;
+    left: 134px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.total div span {
+    font-size: 47px;
+    margin-right: 5px;
+}
+
+.total .total-num {
+    color: #68fd9c;
+    top: 103px;
+}
+
+.total .total-count {
+    color: #51a3ff;
+    top: 223px;
+}
+
+.total h2 {
+    display: inline-block;
+}
+
+.time {
+    width: 525px;
+    height: 503px;
+    background: url(../img/time.png) no-repeat center;
+    position: relative;
+    margin: 20px auto;
+}
+
+.time .scroll {
+    width: 440px;
+    height: 400px;
+    overflow: hidden;
+    position: absolute;
+    top: 70px;
+    left: 42px;
+    color: #00d0e4;
+}
+
+.time ul {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+}
+
+.time ul li {
+    height: 50px;
+    padding-top: 10px;
+    /*line-height: 50px;*/
+    padding: 0;
+    border-bottom: 1px dashed #284592;
+    font-size: 16px;
+}
+
+.card-num {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+}
+
+.trading {
+    float: right;
+    height: 50px;
+    line-height: 50px;
+}
+
+.trading-num {
+    font-size: 18px;
+    height: 50px;
+    line-height: 50px;
+}
+
+.carousel-inner {
+    overflow-x: scroll !important;
+}

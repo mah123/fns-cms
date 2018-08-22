@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fnsco.cms.dao.ArticleMapper">
+    <resultMap id="BaseResultMap" type="com.fnsco.cms.model.Article">
+        <id column="article_id" property="articleId" jdbcType="INTEGER"/>
+        <result column="article_title" property="articleTitle" jdbcType="VARCHAR"/>
+        <result column="article_content" property="articleContent" jdbcType="VARCHAR"/>
+        <result column="article_desc" property="articleDesc" jdbcType="VARCHAR"/>
+        <result column="article_from" property="articleFrom" jdbcType="VARCHAR"/>
+        <result column="article_readtimes" property="articleReadTimes" jdbcType="VARCHAR"/>
+        <result column="menu_id" property="menuID" jdbcType="INTEGER"/>
+        <result column="article_author" property="articleAuthor" jdbcType="VARCHAR"/>
+        <result column="article_pubtime" property="articlePubTime" jdbcType="TIMESTAMP"/>
+        <result column="article_pubuser" property="articlePubUser" jdbcType="VARCHAR"/>
+        <result column="article_updatetime" property="articleUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="article_updateuser" property="articleUpdateUser" jdbcType="VARCHAR"/>
+        <result column="article_deltime" property="articleDelTime" jdbcType="TIMESTAMP"/>
+        <result column="article_state" property="articleState" jdbcType="INTEGER"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    article_id, article_title, article_content, article_desc, article_from, article_readtimes, 
+    menu_id, article_author, article_pubtime, article_pubuser, article_updatetime, article_updateuser, 
+    article_deltime, article_state
+  </sql>
+
+    <select id="queryPageList" resultMap="BaseResultMap" parameterType="net.fnsco.core.base.PageDTO">
+        select
+        <include refid="Base_Column_List"/>
+        from fns_cms_article
+        <!-- <where>
+             <if test="condition.articleTitle != null and condition.articleTitle !=''">
+                 AND  article_title  like concat ('%', #{condition.articleTitle,jdbcType=VARCHAR}, '%')
+             </if>
+         </where>-->
+        where article_state != '0'
+        and article_title like CONCAT('%', #{condition.articleTitle,jdbcType=VARCHAR}, '%')
+        order by article_id asc
+        limit #{startRow} , #{perPageSize}
+    </select>
+
+    <select id="queryTotalByCondition" resultType="java.lang.Integer" parameterType="com.fnsco.cms.model.Article">
+        select count(1)
+        from fns_cms_article
+        where article_title like CONCAT('%', #{article.articleTitle,jdbcType=VARCHAR}, '%')
+        <!--<where>
+            <if test="articleTitle != null and articleTitle !=''">
+                AND article_title = #{articleTitle,jdbcType=VARCHAR}
+            </if>
+        </where>-->
+    </select>
+
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from fns_cms_article
+        where article_id = #{articleId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fns_cms_article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.fnsco.cms.model.Article">
+    insert into fns_cms_article (article_id, article_title, article_content, 
+      article_desc, article_from, article_readtimes, 
+      menu_id, article_author, article_pubtime, 
+      article_pubuser, article_updatetime, article_updateuser, 
+      article_deltime, article_state)
+    values (#{articleId,jdbcType=INTEGER}, #{articleTitle,jdbcType=VARCHAR}, #{articleContent,jdbcType=VARCHAR}, 
+      #{articleDesc,jdbcType=VARCHAR}, #{articleFrom,jdbcType=VARCHAR}, #{articleReadTimes,jdbcType=VARCHAR}, 
+      #{menuID,jdbcType=INTEGER}, #{articleAuthor,jdbcType=VARCHAR}, #{articlePubTime,jdbcType=TIMESTAMP}, 
+      #{articlePubUser,jdbcType=VARCHAR}, #{articleUpdateTime,jdbcType=TIMESTAMP}, #{articleUpdateUser,jdbcType=VARCHAR}, 
+      #{articleDelTime,jdbcType=TIMESTAMP}, #{articleState,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fnsco.cms.model.Article">
+        insert into fns_cms_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">
+                article_id,
+            </if>
+            <if test="articleTitle != null">
+                article_title,
+            </if>
+            <if test="articleContent != null">
+                article_content,
+            </if>
+            <if test="articleDesc != null">
+                article_desc,
+            </if>
+            <if test="articleFrom != null">
+                article_from,
+            </if>
+            <if test="articleReadTimes != null">
+                article_readtimes,
+            </if>
+            <if test="menuID != null">
+                menu_id,
+            </if>
+            <if test="articleAuthor != null">
+                article_author,
+            </if>
+            <if test="articlePubTime != null">
+                article_pubtime,
+            </if>
+            <if test="articlePubUser != null">
+                article_pubuser,
+            </if>
+            <if test="articleUpdateTime != null">
+                article_updatetime,
+            </if>
+            <if test="articleUpdateUser != null">
+                article_updateuser,
+            </if>
+            <if test="articleDelTime != null">
+                article_deltime,
+            </if>
+            <if test="articleState != null">
+                article_state,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">
+                #{articleId,jdbcType=INTEGER},
+            </if>
+            <if test="articleTitle != null">
+                #{articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="articleContent != null">
+                #{articleContent,jdbcType=VARCHAR},
+            </if>
+            <if test="articleDesc != null">
+                #{articleDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="articleFrom != null">
+                #{articleFrom,jdbcType=VARCHAR},
+            </if>
+            <if test="articleReadTimes != null">
+                #{articleReadTimes,jdbcType=VARCHAR},
+            </if>
+            <if test="menuID != null">
+                #{menuID,jdbcType=INTEGER},
+            </if>
+            <if test="articleAuthor != null">
+                #{articleAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="articlePubTime != null">
+                #{articlePubTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="articlePubUser != null">
+                #{articlePubUser,jdbcType=VARCHAR},
+            </if>
+            <if test="articleUpdateTime != null">
+                #{articleUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="articleUpdateUser != null">
+                #{articleUpdateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="articleDelTime != null">
+                #{articleDelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="articleState != null">
+                #{articleState,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.fnsco.cms.model.Article">
+        update fns_cms_article
+        <set>
+            <if test="articleTitle != null">
+                article_title = #{articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="articleContent != null">
+                article_content = #{articleContent,jdbcType=VARCHAR},
+            </if>
+            <if test="articleDesc != null">
+                article_desc = #{articleDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="articleFrom != null">
+                article_from = #{articleFrom,jdbcType=VARCHAR},
+            </if>
+            <if test="articleReadTimes != null">
+                article_readtimes = #{articleReadTimes,jdbcType=VARCHAR},
+            </if>
+            <if test="menuID != null">
+                menu_id = #{menuID,jdbcType=INTEGER},
+            </if>
+            <if test="articleAuthor != null">
+                article_author = #{articleAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="articlePubTime != null">
+                article_pubtime = #{articlePubTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="articlePubUser != null">
+                article_pubuser = #{articlePubUser,jdbcType=VARCHAR},
+            </if>
+            <if test="articleUpdateTime != null">
+                article_updatetime = #{articleUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="articleUpdateUser != null">
+                article_updateuser = #{articleUpdateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="articleDelTime != null">
+                article_deltime = #{articleDelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="articleState != null">
+                article_state = #{articleState,jdbcType=INTEGER},
+            </if>
+        </set>
+        where article_id = #{articleId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fnsco.cms.model.Article">
+    update fns_cms_article
+    set article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_content = #{articleContent,jdbcType=VARCHAR},
+      article_desc = #{articleDesc,jdbcType=VARCHAR},
+      article_from = #{articleFrom,jdbcType=VARCHAR},
+      article_readtimes = #{articleReadTimes,jdbcType=VARCHAR},
+      menu_id = #{menuID,jdbcType=INTEGER},
+      article_author = #{articleAuthor,jdbcType=VARCHAR},
+      article_pubtime = #{articlePubTime,jdbcType=TIMESTAMP},
+      article_pubuser = #{articlePubUser,jdbcType=VARCHAR},
+      article_updatetime = #{articleUpdateTime,jdbcType=TIMESTAMP},
+      article_updateuser = #{articleUpdateUser,jdbcType=VARCHAR},
+      article_deltime = #{articleDelTime,jdbcType=TIMESTAMP},
+      article_state = #{articleState,jdbcType=INTEGER}
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+
+    <update id="delete" parameterType="java.lang.Integer">
+        update fns_cms_article
+        set article_state = '0'
+        where article_id = #{articleId,jdbcType=INTEGER}
+    </update>
+
+</mapper>
